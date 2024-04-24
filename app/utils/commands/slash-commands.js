@@ -11,6 +11,10 @@ const commands = [
       },
     ],
   },
+  {
+    name: "test",
+    description: "test",
+  },
   // more commands here
 ];
 

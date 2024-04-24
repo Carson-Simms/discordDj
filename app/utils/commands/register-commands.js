@@ -1,27 +1,26 @@
+require("dotenv").config();
+
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { clientId, guildId, token } = require("./config.json");
-const commands = require("./utils/slash-commands");
+
+const clientId = process.env.DISCORD_CLIENT_ID;
+const guildId = process.env.DISCORD_GUILD_ID;
+const token = process.env.DISCORD_BOT_TOKEN;
+
+const commands = require("./slash-commands");
 
 const rest = new REST({ version: "9" }).setToken(token);
 
 (async () => {
   try {
-    console.log("Starting to refresh application (/) commands...");
+    console.log("Started refreshing application (/) commands.");
 
-    console.log(
-      "Registering the following commands:",
-      JSON.stringify(commands, null, 2)
-    );
+    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+      body: commands,
+    });
 
-    const result = await rest.put(
-      Routes.applicationGuildCommands(clientId, guildId),
-      { body: commands }
-    );
-
-    console.log("Discord API response:", JSON.stringify(result, null, 2));
     console.log("Successfully reloaded application (/) commands.");
   } catch (error) {
-    console.error("Failed to reload commands:", error);
+    console.error(error);
   }
 })();
