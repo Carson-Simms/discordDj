@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@discordjs/rest": "^2.2.0",
+    "@discordjs/voice": "^0.16.1",
+    "discord-api-types": "^0.37.81",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.0",
+    "ytdl-core": "^4.11.5"
+  }
+}
